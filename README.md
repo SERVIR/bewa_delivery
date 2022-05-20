@@ -35,6 +35,13 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
+- Create .env file to hold your "SECRET_KEY".  You may generate your own random key using letters numbers and 
+special characters (56 characters is normal, but you can vary), the file needs to be in bewa_delivery/bewa_delivery 
+add the following
+```commandline
+SECRET_KEY = 'REPLACE WITH A SECRET KEY USING LETTERS, NUMBERS, AND SPECIAL CHARACTERS'
+```
+
 At this point you should be able to start the application.  From the root directory you can run the following command
 
 ```
