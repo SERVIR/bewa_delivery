@@ -25,7 +25,7 @@ conda env create -f environment.yml
 - enter the environment
 
 ```shell
-conda activate bgd_ewa
+conda activate bewa_delivery
 ```
 
 - Create database tables and superuser
@@ -35,11 +35,13 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-- Create .env file to hold your "SECRET_KEY".  You may generate your own random key using letters numbers and 
+- Create data.json file to hold your "SECRET_KEY".  You may generate your own random key using letters numbers and 
 special characters (56 characters is normal, but you can vary), the file needs to be in bewa_delivery/bewa_delivery 
 add the following
 ```commandline
-SECRET_KEY = 'REPLACE WITH A SECRET KEY USING LETTERS, NUMBERS, AND SPECIAL CHARACTERS'
+{
+  "SECRET_KEY":"REPLACE WITH A SECRET KEY USING LETTERS, NUMBERS, AND SPECIAL CHARACTERS"
+}
 ```
 
 At this point you should be able to start the application.  From the root directory you can run the following command
@@ -135,9 +137,16 @@ server {
 ```
 # Create Alias commands to make starting the application simple
 Create a file at /etc/profile.d named bewa_alias.sh and add the following:
-```commandline
-alias bstart='sudo chown -R nginx {REPLACE WITH PATH TO APPLICATION ROOT}; sudo service bewa restart; sudo service nginx restart'
+```editorconfig
+alias bewa='cd /servir_apps/bewa'
+alias actbewa='conda activate bewa_delivery'
+alias uobewa='sudo chown -R ${USER} /servir_apps/bewa_delivery'
+alias sobewa='sudo chown -R www-data /servir_apps/bewa_delivery'
+alias bewastart='sudo service bewa restart; sudo service nginx restart; so'
+alias bewastop='sudo service bewa stop'
+alias bewarestart='bewastop; bewastart'
 ```
+
 Now activate the alias file by running
 ```commandline
 source /etc/profile.d/bewa_alias.sh
